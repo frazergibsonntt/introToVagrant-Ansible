@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Web Developer</title>
+
+    <!-- Google Font Roboto -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="calculator">
+        <h2>Numbers</h2>
+        <!-- A Form containing inputs fields and submit button -->
+        <form id="calculateForm" method="POST">
+          <p>Number One</p>
+          <input
+            type="number"
+            name="number_one"
+            placeholder="Enter number one"
+            required
+          />
+
+          <p>Number Two</p>
+          <input
+            type="number"
+            name="number_two"
+            placeholder="Enter number two"
+            required
+          />
+
+          <p>Operation</p>
+          <select name="math_operations">
+            <option value="+" selected>Addition</option>
+            <option value="-">Substract</option>
+            <option value="*">Multiply</option>
+            <option value="/">Divison</option>
+          </select>
+
+          <button type="submit" class="btn-post">Post</button>
+        </form>
+        <!-- / A Form containing inputs fields and submit button -->
+      </div>
+      <div class="result">
+        <h2>Results</h2>
+        <!-- A Table for displaying computation results -->
+        <table id="table-data">
+          <thead>
+            <tr>
+              <th>Number 1</th>
+              <th>Number 1</th>
+              <th>Response</th>
+              <th>Expected</th>
+              <th>Passed</th>
+              <th>Remove</th>
+            </tr>
+          </thead>
+          <!-- Table body which contains the Computation Data -->
+          <tbody class="results"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+.container .calculator {
+  width: 25%;
+  height: 100vh;
+  padding: 0 20px;
+  background-color: #28353d;
+}
+
+.container .calculator h2,
+p {
+  color: #fff;
+}
+
+.container .calculator h2 {
+  font-size: 30px;
+  padding-top: 20px;
+  margin: 10px;
+}
+
+.container .calculator p {
+  padding-top: 10px;
+  margin: 10px;
+}
+
+.calculator input {
+  width: 100%;
+  height: 35px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #fbbf30;
+  background-color: #28353d;
+  display: block;
+  font-family: sans-serif;
+  color: #fbbf30;
+  background-color: #28353d;
+  border: 1px solid #fbbf30;
+  border-radius: 35px;
+}
+
+.calculator select {
+  width: 100%;
+  height: 35px;
+  padding: 0px 20px;
+  box-sizing: border-box;
+  border: 2px solid #fbbf30;
+  background-color: #28353d;
+  display: block;
+  font-family: sans-serif;
+  color: #fbbf30;
+  background-color: #28353d;
+  border: 1px solid #fbbf30;
+  border-radius: 35px;
+}
+
+.calculator input:focus,
+select:focus {
+  outline: none !important;
+  color: #fbbf30;
+  background-color: #28353d;
+}
+
+.calculator .btn-post {
+  width: 100%;
+  background-color: #a8881c;
+  border: 2px solid #fbbf30;
+  border-radius: 35px;
+  color: #28353d;
+  padding: 8px 5px;
+  text-decoration: none;
+  margin: 25px 2px;
+  cursor: pointer;
+}
+
+.container .result {
+  width: 75%;
+  height: 100vh;
+  background-color: #fef9e4;
+  padding: 0 20px;
+}
+
+.result h2 {
+  font-size: 30px;
+  padding-top: 20px;
+  margin: 10px 10px 10px 0px;
+}
+
+.result table {
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+}
+
+.result tr {
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+}
+
+.result thead {
+  background-color: #28353d;
+  color: #fbbf30;
+}
+
+.result th,
+td {
+  padding: 5px;
+}
+
+.result .remove {
+  font-size: 20px;
+  font-weight: bolder;
+  color: red;
+  cursor: pointer;
+}
+
+/* Styles for Changing background color of rows */
+
+.bg-no {
+  background-color: #f6ad9f;
+  color: #000;
+}
+
+.bg-yes {
+  background-color: #ffe28a;
+  color: #000;
+}
