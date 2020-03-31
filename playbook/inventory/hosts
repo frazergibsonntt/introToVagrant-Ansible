@@ -1,0 +1,15 @@
+[web]
+web1
+
+[db]
+db1
+
+[stack:children]
+web
+db
+
+[stack:vars]
+ansible_connection=ssh
+ansible_port=22
+ansible_ssh_private_key_file=/home/vagrant/.ssh/ansible_key
+ansible_user=vagrant

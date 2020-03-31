@@ -2,63 +2,11 @@
 - name: tomcat
   hosts: web
   become: yes
-  tasks:
-  - name: Install tomcat
-    package:
-      name: tomcat
-      update_cache: yes
-      state: latest
+  roles:
+    - role: tomcat
 
-  - name: ensure tomcat is running
-    service:
-      name: tomcat
-      state: started
-
-  - name:
-    package:
-      name: tomcat-webapps
-      state: latest
-      
-  - name: Copy static webpage
-    copy:
-      src: /vagrant/html
-      dest: /var/lib/tomcat/webapps/
-      owner: tomcat
-      group: tomcat
-      mode: 440
-
-  - name: Copy dynamic calculator web apps
-    copy:
-      src: /vagrant/web-app-basic-calculator-master
-      dest: /var/lib/tomcat/webapps/
-      owner: tomcat
-      group: tomcat
-      mode: 440
-
-- name: db
+- name: db with roles
   hosts: db
   become: yes
-  tasks: 
-  - name: ensure mySQL repo installed
-    package:
-      name: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
-      state: present
-
-  - name: Install mySQL service
-    package:
-      name: mysql-server
-      state: latest
-
-
-
-  - name: ensure DB is running
-    service:
-      name: mysqld
-      state: started
-
-  
-
-
-
-
-
+  roles: 
+    - role: db

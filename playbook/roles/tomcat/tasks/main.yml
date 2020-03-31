@@ -1,0 +1,32 @@
+---
+- name: Install tomcat
+  package:
+    name: tomcat
+    update_cache: yes
+    state: latest
+
+- name: ensure tomcat is running
+  service:
+    name: tomcat
+    state: started
+
+- name:
+  package:
+    name: tomcat-webapps
+    state: latest
+    
+- name: Copy static webpage
+  copy:
+    src: /vagrant/html
+    dest: /var/lib/tomcat/webapps/
+    owner: tomcat
+    group: tomcat
+    mode: 440
+
+- name: Copy dynamic calculator web apps
+  copy:
+    src: /vagrant/web-app-basic-calculator-master
+    dest: /var/lib/tomcat/webapps/
+    owner: tomcat
+    group: tomcat
+    mode: 440
