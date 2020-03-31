@@ -35,6 +35,26 @@
       group: tomcat
       mode: 440
 
+- name: db
+  hosts: db
+  become: yes
+  tasks: 
+  - name: ensure mySQL repo installed
+    package:
+      name: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+      state: present
+
+  - name: Install mySQL service
+    package:
+      name: mysql-server
+      state: latest
+
+
+
+  - name: ensure DB is running
+    service:
+      name: mysqld
+      state: started
 
   
 

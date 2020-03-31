@@ -25,6 +25,23 @@ Vagrant.configure("2") do |config|
     SHELL
   end
 
+  config.vm.define "db" do |db|
+    db.vm.box = "centos/7"
+    db.vm.network :"private_network", ip: "10.0.0.12"
+    db.vm.hostname = 'db'
+    db.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--memory", 1024]
+      v.customize ["modifyvm", :id, "--name", "db"]
+    end
+    #Think about whether i need to forward port for a DB
+    #web.vm.network "forwarded_port", id: "db", guest: 8080, host: 8080
+    db.vm.provision "shell", inline: <<-SHELL
+      cat /vagrant/keys/ansible_key.pub >> /home/vagrant/.ssh/authorized_keys
+    SHELL
+  end
+
+
+
   config.vm.define "control" do |control|
     control.vm.box = "ubuntu/bionic64"
     control.vm.network :"private_network", ip: "10.0.0.10"
@@ -38,10 +55,14 @@ Vagrant.configure("2") do |config|
       apt-get update
       apt-get install -y ansible
       echo "[web] 
-      10.0.0.11 ansible_connection=ssh ansible_ssh_private_key_file=/home/vagrant/.ssh/ansible_key" >> /etc/ansible/hosts
-      echo "10.0.0.11 web" >> /etc/hosts
+      10.0.0.11 ansible_connection=ssh ansible_ssh_private_key_file=/home/vagrant/.ssh/ansible_key
+      [db]
+      10.0.0.12 ansible_connection=ssh ansible_ssh_private_key_file=/home/vagrant/.ssh/ansible_key" >> /etc/ansible/hosts
+      echo "10.0.0.11 web
+      10.0.0.12 db" >> /etc/hosts
       chmod 400 /home/vagrant/.ssh/ansible_key
       runuser -l vagrant -c 'ssh-keyscan -H 10.0.0.11 >> /home/vagrant/.ssh/known_hosts'
+      runuser -l vagrant -c 'ssh-keyscan -H 10.0.0.12 >> /home/vagrant/.ssh/known_hosts'
       runuser -l vagrant -c 'ansible-playbook /home/vagrant/playbook/playbook.yml'
     SHELL
 
