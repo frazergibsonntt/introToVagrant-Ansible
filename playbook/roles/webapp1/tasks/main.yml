@@ -1,0 +1,10 @@
+---
+- name: Download WAR to server
+  synchronize:
+    src: /vagrant/war/
+    #NTTData_Web_App-1.0-SNAPSHOT.war
+    dest: /var/lib/tomcat/webapps/war/
+    #NTTData_Web_App.war
+  notify:
+    - Restart tomcat
+

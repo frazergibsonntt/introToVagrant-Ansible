@@ -4,9 +4,12 @@
   become: yes
   roles:
     - role: tomcat
+    - role: webapp3
 
 - name: db with roles
   hosts: db
   become: yes
   roles: 
     - role: db
+
+  

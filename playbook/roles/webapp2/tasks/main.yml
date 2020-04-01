@@ -1,0 +1,28 @@
+---
+  - name: Ensure unzip is installed.
+    package: 
+      name: unzip 
+      state: present
+  - name: Download WAR to server
+    synchronize:
+      src: /vagrant/war/
+      dest: /var/lib/tomcat/webapps/war
+
+  - name: Create a directory if it does not exist
+    become: true
+    file:
+      path: /var/lib/tomcat/webapps/warUnzipped/
+      state: directory
+      mode: '0755'
+
+  - name: Unzip war file
+    unarchive: #src=/var/lib/tomcat/webapps/examples/NTTData_Web_App.war dest=/var/lib/tomcat/webapps/ROOT/ copy=no mode=0755 owner=vagrant group=vagrant
+      src: /var/lib/tomcat/webapps/war/NTTData_Web_App-1.0-SNAPSHOT.war
+      dest: /var/lib/tomcat/webapps/warUnzipped/
+      copy: no
+      mode: 0755
+      owner: vagrant
+      group: vagrant
+    notify:
+       - Restart tomcat
+

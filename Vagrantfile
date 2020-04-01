@@ -36,6 +36,9 @@ Vagrant.configure("2") do |config|
     #Think about whether i need to forward port for a DB
     #web.vm.network "forwarded_port", id: "db", guest: 8080, host: 8080
     db1.vm.provision "shell", inline: <<-SHELL
+      # The line below copies the public key into the authorised key file on the remote machine. (remote i mean web and db)
+      # This authorized_keys file  on the remote machine is compared against
+      # the private key in the .ssh/ dir on the control machine when attempting to ssh into the remote 
       cat /vagrant/keys/ansible_key.pub >> /home/vagrant/.ssh/authorized_keys
     SHELL
   end
@@ -50,10 +53,17 @@ Vagrant.configure("2") do |config|
       v.customize ["modifyvm", :id, "--memory", 1024]
       v.customize ["modifyvm", :id, "--name", "control"]
     end
+    # The line below copies the private key onto the control machine, in this case we're calling the private key ansible_key
+    # the private key on the control machines is compared against the public key on the remote machine when trying the ssh
     control.vm.provision "file", source: "keys/ansible_key", destination: "/home/vagrant/.ssh/ansible_key"
     control.vm.provision "shell", inline: <<-SHELL
       apt-get update
       apt-get install -y ansible
+      # the etc/ansible/hosts file below is where ansible looks for hosts/machines and the ssh details
+      # the ansible_ssh_private_key_file arg below tells ansible where it should be looking for its private key
+      # the lines below are commented out as i've instead used an inventory/hosts file on local machine (local i mean my laptop)
+      # and added "inventory=inventory" to the ansible.cfg file, so that ansible knows to look in the investory file for 
+      # the info we previously put in the ansible/hosts file
       # echo "[web] 
       # 10.0.0.11 ansible_connection=ssh ansible_ssh_private_key_file=/home/vagrant/.ssh/ansible_key
       # [db]
