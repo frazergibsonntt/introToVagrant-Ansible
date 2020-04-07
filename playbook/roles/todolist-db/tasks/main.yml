@@ -1,0 +1,19 @@
+---
+#sets up the database, and runs the centos.yml to download the mysql repo and mysql client
+- include: centos.yml
+  when: ansible_distribution == "CentOS"
+
+- name: Ensure todolist db is present
+  mysql_db:
+    name: "{{ db_name }}"
+    state: present
+  become: true
+
+- name: Ensure todo user is present
+  mysql_user:
+    name: "{{ db_user }}"
+    host: "%"
+    password: "{{ db_password }}"
+    priv: "{{ db_name }}.*:ALL"
+    state: present
+  become: true

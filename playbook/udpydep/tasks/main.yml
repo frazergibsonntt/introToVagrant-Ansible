@@ -1,0 +1,46 @@
+---
+# - name: start web server
+#   shell: - name: start web server
+#   shell: sudo yum install -y https://centos7.iuscommunity.org/ius-release.rpm
+
+
+- name: install all required dependancies 
+  package: 
+    name: python, python-setuptools, MySQL-python #, python-dev, build-essential, python-pip
+    state: present
+
+
+# - name: install mySQL database
+#   package: 
+#     name: mysql-server, mysql-client
+#     state: installed
+
+# - name: Start MySQL service
+#   service:
+#     name: mysql
+#     state: started
+#     enabled: yes
+
+- name: Create application database
+  mysql_db: name=employee_db state=present
+
+- name: create database user
+  mysql_user:
+    name: db_user
+    password: Passw0rd
+    priv: '*.*:ALL'
+    state: present
+    host: '%'
+
+- name: instally python flask dependancy
+  pip: 
+    name: flask, flask-mysql
+    state: present
+
+- name: copy source code
+  copy: 
+    src=/vagrant/pythonapp/app.py
+    dest=/opt/app.py
+
+- name: start web server
+  shell: FLASK_APP=/opt/app.py nohup flask run --host=0.0.0.0 &

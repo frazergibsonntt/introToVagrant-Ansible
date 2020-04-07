@@ -1,9 +1,9 @@
 ---
 - name: Download WAR to server
   synchronize:
-    src: /vagrant/war/
+    src: /vagrant/war/TodoDemo-0.0.1-SNAPSHOT.war
     #NTTData_Web_App-1.0-SNAPSHOT.war
-    dest: /var/lib/tomcat/webapps/war/
+    dest: /var/lib/tomcat/webapps/TodoDemo-0.0.1-SNAPSHOT.war
     #NTTData_Web_App.war
   notify:
     - Restart tomcat

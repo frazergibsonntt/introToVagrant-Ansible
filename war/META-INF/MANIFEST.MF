@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Implementation-Title: TodoDemo
+Implementation-Version: 0.0.1-SNAPSHOT
+Archiver-Version: Plexus Archiver
+Built-By: GIBSOF
+Implementation-Vendor-Id: com.example.fabrikam
+Spring-Boot-Version: 1.5.3.RELEASE
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: org.springframework.boot.loader.WarLauncher
+Start-Class: com.example.fabrikam.TodoDemo.TodoDemoApplication
+Spring-Boot-Classes: WEB-INF/classes/
+Spring-Boot-Lib: WEB-INF/lib/
+Created-By: Apache Maven 3.6.3
+Build-Jdk: 1.8.0_241
+Implementation-URL: http://projects.spring.io/spring-boot/TodoDemo/
+

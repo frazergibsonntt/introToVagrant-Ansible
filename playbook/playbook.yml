@@ -4,12 +4,34 @@
   become: yes
   roles:
     - role: tomcat
-    - role: webapp3
+    - role: staticpage
+    
+    #- role: webapp1
+  # tasks:
+  # - name: Copy War to tomcat
+  #   copy:
+  #     src: /vagrant/war/TodoDemo-0.0.1-SNAPSHOT.war
+  #     dest: /var/lib/tomcat/webapps/todo.war
+  # - name: Ensure tomcat is configured
+  #   copy:
+  #     src: /vagrant/war/application.properties
+  #     dest: /var/lib/tomcat/webapps/todo/WEB-INF/classes/application.properties
+  #     owner: tomcat
+  #     group: tomcat
 
 - name: db with roles
   hosts: db
   become: yes
   roles: 
-    - role: db
+    # - role: db
+    #- role: python3
+    - role: todolist-db
+
+
+# - name: python app
+#   hosts: web1 #, db1
+#   become: yes
+#   roles: 
+#     - role: udpydep
 
   

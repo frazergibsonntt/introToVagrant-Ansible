@@ -1,0 +1,8 @@
+---
+- name: Copy static webpage
+  copy:
+    src: /vagrant/html
+    dest: /var/lib/tomcat/webapps/
+    owner: tomcat
+    group: tomcat
+    mode: 440

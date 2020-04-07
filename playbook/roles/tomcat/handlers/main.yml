@@ -1,2 +1,5 @@
 ---
-# handlers file for tomcat
+- name: ensure tomcat is running
+  service:
+    name: tomcat
+    state: restarted

@@ -1,6 +1,8 @@
 Role Name
 =========
 
+Trying to load a demo app as an unzipped war file
+
 A brief description of the role goes here.
 
 Requirements

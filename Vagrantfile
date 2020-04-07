@@ -71,8 +71,8 @@ Vagrant.configure("2") do |config|
       echo "10.0.0.11 web1
       10.0.0.12 db1" >> /etc/hosts
       chmod 400 /home/vagrant/.ssh/ansible_key
-      runuser -l vagrant -c 'ssh-keyscan -H 10.0.0.11 >> /home/vagrant/.ssh/known_hosts'
-      runuser -l vagrant -c 'ssh-keyscan -H 10.0.0.12 >> /home/vagrant/.ssh/known_hosts'
+      runuser -l vagrant -c 'ssh-keyscan -Ht rsa web1,10.0.0.11 >> /home/vagrant/.ssh/known_hosts'
+      runuser -l vagrant -c 'ssh-keyscan -Ht rsa db1,10.0.0.12 >> /home/vagrant/.ssh/known_hosts'
       runuser -l vagrant -c 'cd /vagrant/playbook && ansible-playbook playbook.yml'
     SHELL
     control.vm.synced_folder ".", "/vagrant",  :mount_options => ["dmode=755,fmode=755"]
